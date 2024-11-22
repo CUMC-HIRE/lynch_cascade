@@ -1,10 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Jul  6 00:21:05 2021
-@author: mai2125
-"""
-
 import pathlib as pl
 import pandas as pd
 import numpy as np
@@ -29,7 +22,6 @@ RUN_TIME = 100-START_AGE
 CYCLE_LENGTH = 1
 iterations=100
 
-# need four of these for each matrix in the model ####
 # MODEL STATES
 ALL_STATES = {
         0: "start", # starting state
@@ -103,8 +95,6 @@ csy_complication = 0.007
 csy_death_prob= 0.0061
 couns_cost = 250
 csy_disutility = 0.0384
-cu_dict = {"cancer": (cancer_cost, cancer_util),"start": (0, healthy_util)}
-
 
 
 group_to_matrix_mapping = {

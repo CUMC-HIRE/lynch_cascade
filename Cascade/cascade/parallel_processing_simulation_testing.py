@@ -111,14 +111,6 @@ def microsim_worker(args):
             )
             state_name = ps.ALL_STATES[int(p_matrix[t + 1])]
 
-            # Cost and utility calculations
-            if state_name in ps.cu_dict.keys():
-                utilities += ps.cu_dict[state_name][1] * discount_rate
-                dis_cost += ps.cu_dict[state_name][0] * discount_rate
-                un_cost += ps.cu_dict[state_name][0]
-                dis_cancer += ps.cu_dict[state_name][0] * discount_rate
-                un_cancer += ps.cu_dict[state_name][0]
-
             # Life years count
             if p_matrix[t + 1] in ps.life_states:
                 life_years += 1
@@ -132,6 +124,7 @@ def microsim_worker(args):
 
             # Apply CSY and check for complications
             if state_name == "start":
+                utilities += ps.healthy_util * discount_rate
                 dis_cost, un_cost, dis_screening, un_screening, csy_counter, csy_complication_flag, csy_death_flag = apply_csy_and_check_for_complications(
                     t, ps, person, dis_cost, un_cost, dis_screening, un_screening, csy_counter, discount_rate
                 )
@@ -153,8 +146,17 @@ def microsim_worker(args):
                 un_cancer += ps.init_cancer_cost
                 cancer_count = 1
                 cancer_t += t
+                cancer_first_year = t
+            #  For subsequent years in the cancer state, apply subsequent_cancer_cost
+            elif state_name == "cancer" and t > cancer_first_year:
+                utilities += ps.cancer_util * discount_rate
+                dis_cost += ps.cancer_cost * discount_rate
+                un_cost += ps.cancer_cost
+                
+                dis_cancer += ps.cancer_cost * discount_rate
+                un_cancer += ps.cancer_cost
 
-            elif state_name == "cancer_death" and ps.ALL_STATES[int(p_matrix[t])] != "cancer_death":
+            if state_name == "cancer_death" and ps.ALL_STATES[int(p_matrix[t])] != "cancer_death":
                 dis_cost += ps.cancer_death_cost * discount_rate
                 un_cost += ps.cancer_death_cost
                 dis_cancer += ps.cancer_death_cost * discount_rate
