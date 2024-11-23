@@ -24,14 +24,14 @@ iterations=100
 
 # MODEL STATES
 ALL_STATES = {
-        0: "start", # starting state
-        1: "msi", # MSI testing
+        0: "start",
+        1: "msi", 
         2: "ihc",
         3: "ts",
-        4: "germline", # identifies germline mutation through specified strat
-        5: "cancer", # cancer states
-        6: "cancer_death", #IHC death due to cancer diagnosis
-        7: "all_cause" # all other causes of death
+        4: "germline",
+        5: "cancer",
+        6: "cancer_death", 
+        7: "all_cause" 
         }
 
 WTP = 100000 # willingness to pay threshold
@@ -104,60 +104,7 @@ group_to_matrix_mapping = {
 
 df=pd.read_csv("no_adherence.csv")
 
-
-
-# need four of these for each matrix in the model ####
-# MODEL STATES
-ALL_STATES = {
-        0: "start", # starting state
-        1: "msi", # MSI testing
-        2: "ihc",
-        3: "ts",
-        4: "germline", # identifies germline mutation through specified strat
-        5: "cancer", # cancer states
-        6: "cancer_death", #IHC death due to cancer diagnosis
-        7: "all_cause" # all other causes of death
-        }
-
-WTP = 100000 # willingness to pay threshold
-discount = .97
-
 strats = list(range(1))
-
-# Pre calibrated transition matrices
-t_matrix_dict = {
-        
-# THIS IS FOR CASCADE PORTION OF MODEL     
-
-        "gen20": np.load(matrices/"gen20.npy"),
-        "gen20t": np.load(matrices/"gen20.npy"),
-        "nh20": np.load(matrices/"nh20.npy"),
-        "mlh20q1": np.load(matrices/"mlh20q1.npy"),
-        "mlh20q2": np.load(matrices/"mlh20q2.npy"),
-        "pms20q1": np.load(matrices/"pms20q1.npy"),
-        "pms20q2": np.load(matrices/"pms20q2.npy"),
-        "pms20q3": np.load(matrices/"pms20q3.npy"),
-              
-        
-        "gen50": np.load(matrices/"gen50.npy"),
-        "gen50t": np.load(matrices/"gen50.npy"),
-        "nh50": np.load(matrices/"nh50.npy"),
-        "mlh50q1": np.load(matrices/"mlh50q1.npy"),
-        "mlh50q2": np.load(matrices/"mlh50q2.npy"),
-        "pms50q1": np.load(matrices/"pms50q1.npy"),
-        "pms50q2": np.load(matrices/"pms50q2.npy"),
-        "pms50q3": np.load(matrices/"pms50q3.npy"),     
-
-        
-        "gen75": np.load(matrices/"gen75.npy"),
-        "gen75t": np.load(matrices/"gen75.npy"),
-        "nh75": np.load(matrices/"nh75.npy"),
-        "mlh75q1": np.load(matrices/"mlh75q1.npy"),
-        "mlh75q2": np.load(matrices/"mlh75q2.npy"),
-        "pms75q1": np.load(matrices/"pms75q1.npy"),
-        "pms75q2": np.load(matrices/"pms75q2.npy"),
-        "pms75q3": np.load(matrices/"pms75q3.npy"),
-        }
 
 # DISEASE AND DEATH STATES IN THE MODEL
 disease_states = [5, 6, 7]
