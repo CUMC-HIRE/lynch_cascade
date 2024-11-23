@@ -5,7 +5,7 @@ import csv
 import random
 
 
-# ACCESS DIFFERENCE FOLDERS FOR DIFFERENT FILES
+# ACCESS DIFFERENT FOLDERS FOR DIFFERENT FILES
 src = pl.Path.cwd().parent
 data_repo = src/"data"
 dump = src/"dump"
