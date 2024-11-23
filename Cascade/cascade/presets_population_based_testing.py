@@ -1,10 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Jul  6 00:21:05 2021
-@author: mai2125
-"""
-
 import pathlib as pl
 import pandas as pd
 import numpy as np
@@ -34,14 +27,14 @@ adherence=100
 
 # MODEL STATES
 ALL_STATES = {
-        0: "start", # starting state
-        1: "msi", # MSI testing
+        0: "start", 
+        1: "msi", 
         2: "ihc",
         3: "ts",
-        4: "germline", # identifies germline mutation through specified strat
-        5: "cancer", # cancer states
-        6: "cancer_death", #IHC death due to cancer diagnosis
-        7: "all_cause" # all other causes of death
+        4: "germline", 
+        5: "cancer", 
+        6: "cancer_death",
+        7: "all_cause"
         }
 
 WTP = 100000 # willingness to pay threshold
